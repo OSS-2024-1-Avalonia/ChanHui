@@ -31,9 +31,8 @@
 			</ExperimentalAcrylicBorder.Material>
 		</ExperimentalAcrylicBorder>
 
-		<Button HorizontalAlignment="Right" VerticalAlignment="Top">
-			<PathIcon Data="{StaticResource store_microsoft_regular}" />
-		</Button>
+		<Button Content="Buy Music"
+     HorizontalAlignment="Right" VerticalAlignment="Top" />
 	</Panel>
 
 </Window>
