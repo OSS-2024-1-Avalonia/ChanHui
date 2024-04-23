@@ -7,7 +7,12 @@
         x:Class="DontWorryAvalonia.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="DontWorryAvalonia">
+        Title="DontWorry"
+		TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent"
+		ExtendClientAreaToDecorationsHint="True"
+		>
+	
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -15,6 +20,19 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<Panel Margin="40">
+		<ExperimentalAcrylicBorder IsHitTestVisible="False">
+			<ExperimentalAcrylicBorder.Material>
+				<ExperimentalAcrylicMaterial
+					BackgroundSource="Digger"
+					TintColor="Black"
+					TintOpacity="1"
+					MaterialOpacity="0.65" />
+			</ExperimentalAcrylicBorder.Material>
+		</ExperimentalAcrylicBorder>
+
+		<Button Content="Buy Music"
+     HorizontalAlignment="Right" VerticalAlignment="Top" />
+	</Panel>
 
 </Window>
