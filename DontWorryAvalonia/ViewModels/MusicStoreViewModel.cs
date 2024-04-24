@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading;
@@ -54,6 +55,9 @@ namespace DontWorryAvalonia.ViewModels
         // Cancellable Image Load
         private CancellationTokenSource? _cancellationTokenSource;
 
+        // Buy Album Command
+        public ReactiveCommand<Unit, AlbumViewModel?> BuyMusicCommand { get; }
+
         // you will add some mock data directly to the view model.
         public MusicStoreViewModel()
         {
@@ -61,6 +65,10 @@ namespace DontWorryAvalonia.ViewModels
                 .Throttle(TimeSpan.FromMilliseconds(400))
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Subscribe(DoSearch!);
+            BuyMusicCommand = ReactiveCommand.Create(() =>
+            {
+                return SelectedAlbum;
+            });
         }
 
         private async void DoSearch(string? s)
