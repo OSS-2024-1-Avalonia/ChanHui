@@ -3,7 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="DontWorryAvalonia.Views.AlbumView">
+             x:Class="DontWorryAvalonia.Views.AlbumView"
+			 xmlns:vm="using:DontWorryAvalonia.ViewModels"
+			 x:DataType="vm:AlbumViewModel">
 
 	<StackPanel Spacing="5" Width="200">
 		<Border CornerRadius="10" ClipToBounds="True">
@@ -14,5 +16,7 @@
 				</Panel>
 			</Panel>
 		</Border>
+		<TextBlock HorizontalAlignment="Center" Text="{Binding Title}"/>
+		<TextBlock HorizontalAlignment="Center" Text="{Binding Artist}"/>
 	</StackPanel>
 </UserControl>

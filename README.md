@@ -3,4 +3,8 @@
 
 # Resource
 Avalonia 웹 아이콘 : https://avaloniaui.github.io/icons.html <br />
-Data Template : https://docs.avaloniaui.net/docs/concepts/templates/
+Data Template : https://docs.avaloniaui.net/docs/concepts/templates/<br />
+Data Resources : 
+  - iTunesSearch(nuget package)
+  - Real Estate(공공데이터)
+

@@ -1,10 +1,12 @@
 ﻿using Avalonia.Controls.Documents;
 using Avalonia.Markup.Xaml.MarkupExtensions;
+using DontWorryAvalonia.Models;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -51,9 +53,29 @@ namespace DontWorryAvalonia.ViewModels
         // you will add some mock data directly to the view model.
         public MusicStoreViewModel()
         {
-            SearchResults.Add(new AlbumViewModel());
-            SearchResults.Add(new AlbumViewModel());
-            SearchResults.Add(new AlbumViewModel());
+            this.WhenAnyValue(x => x.SearchText)
+                .Throttle(TimeSpan.FromMilliseconds(400))
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(DoSearch!);
+        }
+
+        private async void DoSearch(string? s)
+        {
+            IsBusy = true;
+            SearchResults.Clear();
+
+            if (!string.IsNullOrWhiteSpace(s))
+            {
+                var albums = await Album.SearchAsync(s);
+
+                foreach (var album in albums)
+                {
+                    var vm = new AlbumViewModel(album);
+                    SearchResults.Add(vm);
+                }
+            }
+
+            IsBusy = false;
         }
     }
 }
