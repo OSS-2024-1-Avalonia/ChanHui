@@ -12,6 +12,7 @@
         Background="Transparent"
 		ExtendClientAreaToDecorationsHint="True"
 		WindowStartupLocation="CenterScreen"
+		xmlns:views="clr-namespace:DontWorryAvalonia.Views;assembly=DontWorryAvalonia"
 		>
 	
 
@@ -36,6 +37,20 @@
         Command="{Binding BuyMusicCommand}">
 			<PathIcon Data="{StaticResource go_store}" />
 		</Button>
+
+		<ItemsControl Margin="0 40 0 0" ItemsSource="{Binding Albums}">
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<WrapPanel />
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<views:AlbumView Margin="0 0 20 20" />
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
 	</Panel>
 
 </Window>
