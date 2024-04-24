@@ -9,6 +9,7 @@
         ExtendClientAreaToDecorationsHint="True"
 		Width="1000" Height="550"
 		WindowStartupLocation="CenterOwner"
+		xmlns:views="using:DontWorryAvalonia.Views"
 		>
 	<Panel>
 		<ExperimentalAcrylicBorder IsHitTestVisible="False">
@@ -22,7 +23,7 @@
 		</ExperimentalAcrylicBorder>
 
 		<Panel Margin="40">
-
+			<views:MusicStoreView />
 		</Panel>
 	</Panel>
 </Window>
