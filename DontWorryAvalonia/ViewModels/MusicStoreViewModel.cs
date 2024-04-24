@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -50,6 +51,9 @@ namespace DontWorryAvalonia.ViewModels
             set => this.RaiseAndSetIfChanged(ref _selectedAlbum, value);
         }
 
+        // Cancellable Image Load
+        private CancellationTokenSource? _cancellationTokenSource;
+
         // you will add some mock data directly to the view model.
         public MusicStoreViewModel()
         {
@@ -64,6 +68,11 @@ namespace DontWorryAvalonia.ViewModels
             IsBusy = true;
             SearchResults.Clear();
 
+            // Cancellable Image Load
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource = new CancellationTokenSource();
+            var cancellationToken = _cancellationTokenSource.Token;
+
             if (!string.IsNullOrWhiteSpace(s))
             {
                 var albums = await Album.SearchAsync(s);
@@ -73,9 +82,29 @@ namespace DontWorryAvalonia.ViewModels
                     var vm = new AlbumViewModel(album);
                     SearchResults.Add(vm);
                 }
+
+                if (!cancellationToken.IsCancellationRequested)
+                {
+                    LoadCovers(cancellationToken);
+                }
             }
 
             IsBusy = false;
+        }
+
+        // In this step you will alter the album search (in the music store view model)
+        // so that the cover art is loaded for each album that is found.
+        private async void LoadCovers(CancellationToken cancellationToken)
+        {
+            foreach (var album in SearchResults.ToList())
+            {
+                await album.LoadCover();
+
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    return;
+                }
+            }
         }
     }
 }
