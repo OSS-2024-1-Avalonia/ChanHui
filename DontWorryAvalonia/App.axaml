@@ -5,6 +5,8 @@
              RequestedThemeVariant="Dark">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
+	<!--The view locator can therefore always be found by Avalonia UI, 
+	        when it searches for a data template.-->
     <Application.DataTemplates>
         <local:ViewLocator/>
     </Application.DataTemplates>
