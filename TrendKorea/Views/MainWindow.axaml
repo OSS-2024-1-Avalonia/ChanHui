@@ -1,0 +1,101 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:TrendKorea.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" 
+        x:Class="TrendKorea.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Width="800"
+        Height="600"
+        Icon="/Assets/logo.png"
+        WindowStartupLocation="CenterScreen"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent"
+        Title="TrendKorea">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+  <!-- Style Inject-->
+  <Window.Styles>
+    <Style Selector="Border#Container">
+      <Setter Property="Background" Value="#191919" />
+    </Style>
+    <Style Selector="TextBlock.app-title">
+      <Setter Property="FontSize" Value="20"></Setter>
+      <Setter Property="FontWeight" Value="Bold"></Setter>
+      <Setter Property="Margin" Value="10,10,0,0"></Setter>
+    </Style>
+    <Style Selector="TextBlock.trend-title">
+      <Setter Property="FontSize" Value="16"></Setter>
+      <Setter Property="FontWeight" Value="Bold"></Setter>
+    </Style>
+    <Style Selector="TextBlock.trend-traffic">
+      <Setter Property="FontSize" Value="12"></Setter>
+      <Setter Property="FontWeight" Value="Bold"></Setter>
+      <Setter Property="Foreground" Value="RED" />
+    </Style>
+    <Style Selector="TextBlock.trend-description">
+      <Setter Property="FontSize" Value="10"></Setter>
+      <Setter Property="Foreground" Value="#f5f5f5" />
+    </Style>
+  </Window.Styles>
+
+  <!-- Content -->
+  <Border x:Name="Container">
+    <Grid RowDefinitions="100,*">
+      <Border Grid.Row="0" Padding="10">
+        <StackPanel Spacing="10" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+          <Image Source="avares://TrendKorea/Assets/logo.png" Width="50" Height="50"></Image>
+          <TextBlock Classes="app-title">
+            Trend Korea Today
+            </TextBlock>
+        </StackPanel>
+      </Border>
+      <Border Grid.Row="1" Padding="10">
+        <Border Background="#323130" Height="90" Padding="10" CornerRadius="8">
+          <Grid ColumnDefinitions="30, 60, *, 70,Auto">
+            <Border Grid.Column="0">
+              <TextBlock >#1</TextBlock>
+            </Border>
+            <Border Grid.Column="1">
+              <Image Source="avares://TrendKorea/Assets/logo.png"></Image>
+            </Border>
+            <Border Grid.Column="2" Padding="20,10,0,0">
+              <StackPanel>
+                <TextBlock Classes="trend-title">
+                  AI
+                </TextBlock>
+                <Border Classes="news-container">
+                  <StackPanel>
+                    <Button>
+                      <TextBlock>newnewnew</TextBlock>
+                    </Button>
+                    <TextBlock>newnewnew</TextBlock>  
+                  </StackPanel>
+                </Border>
+              </StackPanel>
+            </Border>
+            <Border Grid.Column="3">
+              <TextBlock Classes="trend-traffic">
+                10,000+
+              </TextBlock>
+            </Border>
+            <Border Grid.Column="4">
+              <TextBlock Classes="trend-description">
+                Description
+              </TextBlock>
+            </Border>
+          </Grid>
+        </Border>
+
+        
+      </Border>
+    </Grid>
+  </Border>
+
+</Window>

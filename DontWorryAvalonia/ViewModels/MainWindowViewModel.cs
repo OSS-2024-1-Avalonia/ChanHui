@@ -5,6 +5,9 @@ using System.Reactive.Linq;
 using System.Windows.Input;
 using DontWorryAvalonia.Models;
 using System.Reactive.Concurrency;
+using System.Net.Http;
+using System.Collections.Generic;
+using System;
 
 namespace DontWorryAvalonia.ViewModels
 {
@@ -20,7 +23,9 @@ namespace DontWorryAvalonia.ViewModels
 
         public MainWindowViewModel()
         {
+
             ShowDialog = new Interaction<MusicStoreViewModel, AlbumViewModel?>();
+
             RxApp.MainThreadScheduler.Schedule(LoadAlbums);
 
             BuyMusicCommand = ReactiveCommand.CreateFromTask(async () =>
@@ -36,7 +41,6 @@ namespace DontWorryAvalonia.ViewModels
                 }
             });
         }
-
         private async void LoadAlbums()
         {
             var albums = (await Album.LoadCachedAsync()).Select(x => new AlbumViewModel(x));

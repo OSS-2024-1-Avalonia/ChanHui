@@ -51,6 +51,8 @@
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>
+    
 	</Panel>
+
 
 </Window>
