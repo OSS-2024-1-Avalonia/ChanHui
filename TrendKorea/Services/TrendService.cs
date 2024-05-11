@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Web;
 
 namespace TrendKorea.Services
 {
     public class GoogleTrendService
     {
-        //Url: https://trends.google.com.vn/trends/trendingsearches/daily/rss?geo=VN
+        //Url: https://trends.google.com.vn/trends/trendingsearches/daily/rss?geo=KR
         public List<TrendItem> GetTodayTrends(string url)
         {
             var result = new List<TrendItem>();
@@ -27,8 +28,8 @@ namespace TrendKorea.Services
 
                     var item = new TrendItem
                     {
-                        Title = childNodes.FirstOrDefault(x => x.Name == "title")?.InnerText,
-                        Description = childNodes.FirstOrDefault(x => x.Name == "description")?.InnerText,
+                        Title = HttpUtility.HtmlDecode(childNodes.FirstOrDefault(x => x.Name == "title")?.InnerText),
+                        Description = HttpUtility.HtmlDecode( childNodes.FirstOrDefault(x => x.Name == "description")?.InnerText),
                         Link = childNodes.FirstOrDefault(x => x.Name == "link")?.InnerText,
                         Traffic = childNodes.FirstOrDefault(x => x.Name == "ht:approx_traffic")?.InnerText,
                         Picture = childNodes.FirstOrDefault(x => x.Name == "ht:picture")?.InnerText,
@@ -48,8 +49,8 @@ namespace TrendKorea.Services
 
                         var newsItem = new NewsItem
                         {
-                            Title = newsChildNodes.FirstOrDefault(x => x.Name == "ht:news_item_title")?.InnerText,
-                            Description = newsChildNodes.FirstOrDefault(x => x.Name == "ht:news_item_snippet")?.InnerText,
+                            Title = HttpUtility.HtmlDecode( newsChildNodes.FirstOrDefault(x => x.Name == "ht:news_item_title")?.InnerText),
+                            Description = HttpUtility.HtmlDecode( newsChildNodes.FirstOrDefault(x => x.Name == "ht:news_item_snippet")?.InnerText),
                             Source = newsChildNodes.FirstOrDefault(x => x.Name == "ht:news_item_source")?.InnerText,
                             Url = newsChildNodes.FirstOrDefault(x => x.Name == "ht:news_item_url")?.InnerText
                         };

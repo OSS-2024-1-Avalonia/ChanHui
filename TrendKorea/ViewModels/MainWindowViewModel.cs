@@ -11,8 +11,8 @@ namespace TrendKorea.ViewModels
         public MainWindowViewModel()
         {
             Items = new ObservableCollection<TrendItemViewModel>();
-            var trendUrl = "https://trends.google.com.vn/trends/trendingsearches/daily/rss?geo=VN";
-        https://trends.google.com.vn/trends/trendingsearches/daily?geo=KR&hl=ko
+            var trendUrl = "https://trends.google.com.vn/trends/trendingsearches/daily/rss?geo=KR";
+
             var googleTrendItems = trendService.GetTodayTrends(trendUrl);
 
             for (int i = 0; i < googleTrendItems.Count; i++)
@@ -32,7 +32,12 @@ namespace TrendKorea.ViewModels
 
                 foreach (var news in googleTrendItem.NewsItems)
                 {
-                    var newsItem = new TrendNewsItemViewModel { Title = news.Title, Description = news.Description, Url = news.Url };
+                    var newsItem = new TrendNewsItemViewModel 
+                    { 
+                        Title = news.Title, 
+                        Description = news.Description, 
+                        Url = news.Url 
+                    };
                     trendItem.NewsItems.Add(newsItem);
                 }
 

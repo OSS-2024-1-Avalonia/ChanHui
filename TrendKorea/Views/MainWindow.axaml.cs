@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using TrendKorea.ViewModels;
 
 namespace TrendKorea.Views
 {

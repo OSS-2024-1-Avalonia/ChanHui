@@ -28,7 +28,6 @@ namespace TrendKorea.ViewModels
         private int _pubDate;
         public int PubDate { get { return _pubDate; } set { this.RaiseAndSetIfChanged(ref _pubDate, value); } }
 
-
         public ObservableCollection<TrendNewsItemViewModel> NewsItems { get; set; }
 
         public TrendItemViewModel()
